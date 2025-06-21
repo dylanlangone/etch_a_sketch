@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>16x16 Hover Grid</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid">
+    <!-- Grid cells will be inserted by JavaScript -->
+  </div>
+
+  <script>
+    const grid = document.querySelector('.grid');
+    for (let i = 0; i < 16 * 16; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.addEventListener('mouseover', () => {
+        cell.classList.add('colored');
+      });
+      grid.appendChild(cell);
+    }
+  </script>
+</body>
+</html>
