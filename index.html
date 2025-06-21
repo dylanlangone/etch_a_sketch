@@ -7,20 +7,41 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="grid">
-    <!-- Grid cells will be inserted by JavaScript -->
-  </div>
+    <button id="resizeButton">Resize Grid</button>
+    <div class="grid" id="grid"></div>
+  
 
   <script>
-    const grid = document.querySelector('.grid');
-    for (let i = 0; i < 16 * 16; i++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.addEventListener('mouseover', () => {
-        cell.classList.add('colored');
-      });
-      grid.appendChild(cell);
+    const grid = document.getElementById('grid');
+    const resizeButton = document.getElementById('resizeButton');
+
+    function createGrid(size) {
+      grid.innerHTML = '';
+      grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+      for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.addEventListener('mouseover', () => {
+          cell.classList.add('colored');
+        });
+        grid.appendChild(cell);
+      }
     }
+
+    resizeButton.addEventListener('click', () => {
+      let newSize = prompt("Enter new grid size (number of squares per side, max 100):");
+      newSize = parseInt(newSize);
+      if (!isNaN(newSize) && newSize > 0 && newSize <= 100) {
+        createGrid(newSize);
+      } else {
+        alert("Please enter a valid number between 1 and 100.");
+      }
+    });
+
+    // Initialize default grid
+    createGrid(16);
   </script>
 </body>
 </html>
